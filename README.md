@@ -11,12 +11,13 @@ Tools wie Mentimeter sind zwar cool, aber benötigen alle eine Registrierung. Au
 
 ## Leicht wie ein Wölkchen!
 
-Bedienung ist einfach:
+
+### So gehts:
 
 1. Frage eingeben 
 1. User scannen QR Code und geben die Antworten ein
 1. Ergebnisse anzeigen
 
-Optional: 
+### Optional: 
 1. eMail adresse eingeben
 1. Ergebnisse werden nach Abschluss per Mail versendet.
