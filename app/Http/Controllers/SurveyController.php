@@ -9,7 +9,7 @@ use App\Models\Survey;
 use App\Models\words;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode; // Add this import statement
-
+use DB;
 
 class SurveyController extends Controller
 {
@@ -68,13 +68,42 @@ class SurveyController extends Controller
 
     public function results($external_id)
     {
+
        
         $survey = Survey::where('external_id', $external_id)->firstOrFail();
         $words = Words::where('survey_id', $survey->id)->get();
 
+        $words_count = DB::table('words')
+                 ->select('word', DB::raw('count(*) as total'))
+                 ->groupBy('word')
+                 ->where('survey_id', $survey->id)
+                 ->get();
+
+
         return view('survey_results', [
             'survey' => $survey,
             'words' => $words,
+            'words_count' => $words_count,
         ]);
     }
+
+
+
+public function survey_results_api($external_id)
+    {
+
+       
+        $survey = Survey::where('external_id', $external_id)->firstOrFail();
+        //$words = Words::where('survey_id', $survey->id)->get();
+
+        $words = DB::table('words')
+                 ->select('word', DB::raw('count(*) as total'))
+                 ->groupBy('word')
+                 ->where('survey_id', $survey->id)
+                 ->get();
+        return response()->json([
+            'words' => $words,
+        ]);
+    }
+
 }

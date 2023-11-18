@@ -56,7 +56,7 @@
         <!-- Contact Section-->
         <section class="page-section" id="contact">
             <div class="container">
-                <livewire:wordcloud-display />
+               
             </div>
             <div class="container">
                 <!-- Contact Section Heading-->
