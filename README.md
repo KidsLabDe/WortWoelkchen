@@ -1,5 +1,8 @@
 # WortWoelkchen
 
+![WortWoelkchen_logo](WortWoelkchen_logo.png)
+
+
 Ein sehr einfaches Umfrage-Tool für Workshops und Veranstaltungen.
 
 ## Warum?
