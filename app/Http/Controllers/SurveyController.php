@@ -100,7 +100,13 @@ class SurveyController extends Controller
     }
 
 
-
+    public function survey_end($external_id)
+    {
+        $survey = Survey::where('external_id', $external_id)->firstOrFail();
+        $survey->end = now();
+        $survey->save();
+        return ($this->results($external_id));
+    }
     public function survey_results_api($external_id)
     {
 

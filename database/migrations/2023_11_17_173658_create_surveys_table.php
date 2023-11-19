@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('question', 500); // Die Frage...
             $table->integer('time')->default(30); // Zeit in Sekunden
             $table->string('answers', 500)->nullable();
+            $table->dateTime('end')->nullable(); // Startzeit
         });
     }
 
