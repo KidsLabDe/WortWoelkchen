@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->uuid('external_id');
             $table->timestamps();
-            $table->string('name', 100)->nullable();
-            $table->string('email', 100)->nullable();
-            $table->string('question', 500);
+            $table->string('name', 100)->nullable(); // Name der Umfrage
+            $table->string('type', 100)->nullable(); // Typ: Umfrage (WordCloud), Multiple Choice, Ja/Nein, ...
+            $table->string('email', 100)->nullable(); // eMail für Ergebnisversand
+            $table->string('question', 500); // Die Frage...
+            $table->integer('time')->default(30); // Zeit in Sekunden
+            $table->string('answers', 500)->nullable();
         });
     }
 

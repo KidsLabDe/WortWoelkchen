@@ -77,6 +77,7 @@ class SurveyController extends Controller
                  ->select('word', DB::raw('count(*) as total'))
                  ->groupBy('word')
                  ->where('survey_id', $survey->id)
+                 ->orderBy('total', 'desc')
                  ->get();
 
 
@@ -97,13 +98,17 @@ public function survey_results_api($external_id)
         //$words = Words::where('survey_id', $survey->id)->get();
 
         $words = DB::table('words')
-                 ->select('word', DB::raw('count(*) as total'))
-                 ->groupBy('word')
+                //->select('word', DB::raw('count(*) as total'))
+                ->select('word')
+                ->groupBy('word')
                  ->where('survey_id', $survey->id)
                  ->get();
-        return response()->json([
-            'words' => $words,
-        ]);
+        // kleiner workaround, da sonst die json nicht richtig funktioniert
+        $words_simple = array();
+        foreach ($words as $word) {
+            $words_simple[] = $word->word;
+        }
+        return response()->json($words_simple);
     }
 
 }
