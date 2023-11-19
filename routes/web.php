@@ -24,3 +24,4 @@ Route::post('/survey-create', [App\Http\Controllers\SurveyController::class, 'st
 Route::get('/survey/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_input'])->name('survey.show');
 Route::post('/word-create', [App\Http\Controllers\WordController::class, 'store'])->name('word.store');
 Route::get('/survey-result/{external_id}', [App\Http\Controllers\SurveyController::class, 'results'])->name('survey_result.show');
+Route::get('/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_input'])->name('survey.show');
