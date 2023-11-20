@@ -21,7 +21,7 @@ class WordController extends Controller
         if (words::where('word', $request->word)
         ->where('user_id', $request->user_id)
         ->first()) {
-            return redirect('survey/' . $request->survey_id);}
+            return redirect( $request->survey_id);}
         else {
             // get the survey_id by external_id
             $survey = Survey::where('external_id', $request->survey_id)->firstOrFail();
@@ -31,9 +31,8 @@ class WordController extends Controller
             $word->user_id = $request->user_id;
             $word->survey_id = $survey->id;
             $word->save();
-            return redirect('survey/' . $request->survey_id);
+            return redirect( $request->survey_id);
         }
-        //redirect()->route('survey/' . $word->survey_id);
     }
 
 }
