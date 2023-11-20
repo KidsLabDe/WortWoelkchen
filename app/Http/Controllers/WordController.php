@@ -20,7 +20,8 @@ class WordController extends Controller
     {
         if (words::where('word', $request->word)
         ->where('user_id', $request->user_id)
-        ->first()) {
+        ->where('survey_id', strval($request->survey_id))
+        ->exists()) {
             return redirect( $request->survey_id);}
         else {
             // get the survey_id by external_id
