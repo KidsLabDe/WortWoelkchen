@@ -32,7 +32,7 @@
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="contactForm" method="post" action="{{url('survey-create')}}"">
+                <form id="contactForm" method="post" action="{{ url('survey-create') }}"">
                     @csrf
                     <!-- Name input-->
                     <div class="form-floating mb-3">
