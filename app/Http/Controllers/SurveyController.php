@@ -41,7 +41,7 @@ class SurveyController extends Controller
 
 
 
-        return $this->show($survey->external_id);
+        return redirect( 'survey/' . $survey->external_id);
 
         //return redirect()->route('home');
     }
@@ -62,6 +62,7 @@ class SurveyController extends Controller
 
     public function show($external_id)
     {
+        //var_dump($external_id); die;
 
         $survey = Survey::where('external_id', $external_id)->firstOrFail();
 

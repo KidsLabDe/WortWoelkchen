@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\SurveyController::class, 'index'])->name('home');
 Route::post('/survey-create', [App\Http\Controllers\SurveyController::class, 'store'])->name('survey.store');
+Route::get('/survey/{external_id}', [App\Http\Controllers\SurveyController::class, 'show'])->name('survey.show');
 Route::get('/survey-result/{external_id}', [App\Http\Controllers\SurveyController::class, 'results'])->name('survey_result.show');
-Route::get('/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_input'])->name('survey.show');
 Route::get('/survey-end/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_end'])->name('survey.end');
 Route::post('/word-create', [App\Http\Controllers\WordController::class, 'store'])->name('word.store');
+Route::get('/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_input'])->name('survey.show');
