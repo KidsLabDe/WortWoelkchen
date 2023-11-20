@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\words;
+use App\Models\Words;
 use App\Models\Survey;
 
 class WordController extends Controller
@@ -26,7 +26,7 @@ class WordController extends Controller
             // get the survey_id by external_id
             $survey = Survey::where('external_id', $request->survey_id)->firstOrFail();
 
-            $word = new words();
+            $word = new Words();
             $word->word = $request->word;
             $word->user_id = $request->user_id;
             $word->survey_id = $survey->id;
