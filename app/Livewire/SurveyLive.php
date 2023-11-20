@@ -27,7 +27,7 @@ class SurveyLive extends Component
         }
         $this->survey_id = $this->survey->id;
         //var_dump($survey); die;
-        return view('livewire.surveylive');
+        return view('livewire.SurveyLive');
     }
 
     public function refreshWords()

@@ -12,7 +12,7 @@
                     <!-- <a href="{{ $url }}" class="btn btn-outline-secondary btn-lg px-4" role="button"
                         target="_blank">Zur Umfrage</a> -->
                 </div>
-                <livewire:surveylive :survey="$survey" />
+                <livewire:SurveyLive :survey="$survey" />
             </x-hero-side>
         </div>
     </section>
