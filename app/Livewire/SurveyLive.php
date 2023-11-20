@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Survey;
-use App\Models\words;
+use App\Models\Words;
 use Illuminate\Support\Facades\DB;
 
 

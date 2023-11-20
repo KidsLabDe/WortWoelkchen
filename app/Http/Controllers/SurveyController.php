@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Survey;
-use App\Models\words;
+use App\Models\Words;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode; // Add this import statement
 use Illuminate\Support\Facades\DB;
