@@ -65,7 +65,7 @@ class SurveyController extends Controller
 
         $survey = Survey::where('external_id', $external_id)->firstOrFail();
 
-        $url = 'survey/' . $survey->external_id;
+        $url = url($survey->external_id);
         $qrCode = QrCode::eyeColor(0, 150, 100, 200, 0, 0, 0)->size(300)->generate($url);
 
 
