@@ -18,11 +18,14 @@ class SurveyLive extends Component
 
     public $survey;
 
+    public $end;
+
     public function render($survey = null)
     {   
         if (isset($survey)) {
             $this->survey = $survey;
         }
+        $this->survey_id = $this->survey->id;
         //var_dump($survey); die;
         return view('livewire.surveylive');
     }
@@ -30,6 +33,7 @@ class SurveyLive extends Component
     public function refreshWords()
     {
 
+        $survey = Survey::find($this->survey_id)->first();
         $this->wordcount = words::where('survey_id', $this->survey->id)->count();
         $this->usercount = words::select('user_id')->where('survey_id', $this->survey->id)->groupBy('user_id')->count(); // TODO: this is not working - always 0
  
