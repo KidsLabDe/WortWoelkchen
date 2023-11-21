@@ -31,7 +31,8 @@ body {
     <main class="form-signin w-100 m-auto">
             <form method="post" action={{ url('word-create') }}>
                 @csrf
-                <input type="hidden" name="survey_id" value="{{ $survey->external_id }}">
+                <input type="hidden" name="survey_id" value="{{ $survey->id }}">
+                <input type="hidden" name="survey_external_id" value="{{ $survey->external_id }}">
                 <input type="hidden" name="user_id" value="{{ $user_id }}">
                 <h1 class="h3 mb-3 fw-normal">{{ $survey->question }}</h1>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Words;
 use App\Models\Survey;
+use Illuminate\Support\Facades\DB;
 
 class WordController extends Controller
 {
@@ -22,18 +23,20 @@ class WordController extends Controller
         ->where('user_id', $request->user_id)
         ->where('survey_id', strval($request->survey_id))
         ->exists()) {
-            return redirect( $request->survey_id);}
+            //echo ("word already exists");
+            return redirect( $request->survey_external_id);
+        }
         else {
             // get the survey_id by external_id
-            $survey = Survey::where('external_id', $request->survey_id)->firstOrFail();
 
             $word = new Words();
             $word->word = $request->word;
             $word->user_id = $request->user_id;
-            $word->survey_id = $survey->id;
+            $word->survey_id = $request->survey_id;
             $word->save();
-            return redirect( $request->survey_id);
+            return redirect( $request->survey_external_id);
         }
     }
 
 }
+
