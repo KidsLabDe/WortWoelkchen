@@ -32,16 +32,44 @@ class SurveyController extends Controller
             return $external_id;
         }
 
+
+        if ($request->type == "multiple-choice") {
+            $answers = array();
+            $answers[] = $request->answer1;
+            $answers[] = $request->answer2;
+            $answers[] = $request->answer3;
+            $answers[] = $request->answer4;
+            $answers[] = $request->answer5;
+            $answers[] = $request->answer6;
+        }
+
+        if ($request->type == "feedback") {
+            
+            $answers = array();
+            $answers[] = "1 - Sehr Gut";
+            $answers[] = "2 - Gut";
+            $answers[] = "3 - Befriedigend";
+            $answers[] = "4 - Ausreichend";
+            $answers[] = "5 - Mangelhaft";
+            $answers[] = "6 - Ungenügend";
+            //dd($answers);
+        }
+
+        //dd($answers);
+
+
         $survey = new Survey();
         $survey->external_id = createExternalId();
         $survey->name = $request->name;
         $survey->email = $request->email;
         $survey->question = $request->question;
+        $survey->type = $request->type;
+        $survey->answers = json_encode($answers);
         $survey->save();
 
 
 
-        return redirect( 'survey/' . $survey->external_id);
+        return redirect('survey/' . $survey->external_id);
 
         //return redirect()->route('home');
     }
@@ -50,13 +78,36 @@ class SurveyController extends Controller
     {
         $survey = Survey::where('external_id', $external_id)->firstOrFail();
 
+
+
         //var_dump($survey); die;
         $session_id = session()->getId();
+        $survey->answers = json_decode($survey->answers);
+
+        $enabled = true; // kann der Teilnehmer noch eine weitere Antwort abgeben?
+
+        if ($survey->type == "feedback" ) {
+            //dd($survey); die;
+
+            //dd(words::where('user_id', $session_id)->where('survey_id', $survey->id)->get());
+
+            if (words::where('user_id', $session_id)
+            ->where('survey_id', $survey->id)
+            ->exists()) {
+                $enabled = false;
+            }
+    
+        }
+
+
 
         return view('survey_input', [
             'survey' => $survey,
             'user_id' => $session_id,
+            'enabled' => $enabled,
         ]);
+
+
     }
 
 

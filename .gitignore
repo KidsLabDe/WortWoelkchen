@@ -20,3 +20,7 @@ yarn-error.log
 wortwoelkchen.sqlite
 /db_data
 woelkchen.sqlite
+design/export/.DS_Store
+.gitignore
+.DS_Store
+.gitignore
