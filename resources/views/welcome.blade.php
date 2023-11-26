@@ -1,6 +1,6 @@
 <x-layout>
 
-    <x-survey-input></x-survey-input>
+    <x-survey-create></x-survey-create>
 
         
                     
@@ -9,5 +9,4 @@
         </div>
     </div>
 </section>
-
 </x-layout>

@@ -32,9 +32,9 @@ class SurveyController extends Controller
             return $external_id;
         }
 
+        $answers = array();
 
         if ($request->type == "multiple-choice") {
-            $answers = array();
             $answers[] = $request->answer1;
             $answers[] = $request->answer2;
             $answers[] = $request->answer3;
@@ -45,7 +45,6 @@ class SurveyController extends Controller
 
         if ($request->type == "feedback") {
             
-            $answers = array();
             $answers[] = "1 - Sehr Gut";
             $answers[] = "2 - Gut";
             $answers[] = "3 - Befriedigend";
@@ -78,13 +77,18 @@ class SurveyController extends Controller
     {
         $survey = Survey::where('external_id', $external_id)->firstOrFail();
 
-
+        // beim ersten Aufruf wird die Startzeit gesetzt und damit die Umfrage gestartet
+        if ($survey->start == null) {
+            $survey->start = now();
+            $survey->save();
+        }
 
         //var_dump($survey); die;
         $session_id = session()->getId();
         $survey->answers = json_decode($survey->answers);
 
         $enabled = true; // kann der Teilnehmer noch eine weitere Antwort abgeben?
+    
 
         if ($survey->type == "feedback" ) {
             //dd($survey); die;
@@ -98,8 +102,6 @@ class SurveyController extends Controller
             }
     
         }
-
-
 
         return view('survey_input', [
             'survey' => $survey,
