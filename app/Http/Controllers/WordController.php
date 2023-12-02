@@ -21,7 +21,7 @@ class WordController extends Controller
     {
         if (words::where('word', $request->word)
         ->where('user_id', $request->user_id)
-        ->where('survey_id', strval($request->survey_id))
+        ->where('survey_id', $request->survey_id)
         ->exists()) {
             //echo ("word already exists");
             return redirect( $request->survey_external_id);

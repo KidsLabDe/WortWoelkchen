@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="time" id="inlineRadio2"
-                            value="0" checked>
+                            value="-1" checked>
                         <label class="form-check-label" for="inlineRadio2">(kein limit))</label>
                     </div>
 

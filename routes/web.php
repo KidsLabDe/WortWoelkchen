@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\ListSurveys;
+use App\Livewire\LiveSurvey;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +25,6 @@ Route::get('/survey/{external_id}', [App\Http\Controllers\SurveyController::clas
 Route::get('/survey-result/{external_id}', [App\Http\Controllers\SurveyController::class, 'results'])->name('survey_result.show');
 Route::get('/survey-end/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_end'])->name('survey.end');
 Route::post('/word-create', [App\Http\Controllers\WordController::class, 'store'])->name('word.store');
-Route::get('/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_input'])->name('survey.show');
+Route::get('/ListSurvey', ListSurveys::class); // TODO: remove this route
+Route::get('/{external_id}', LiveSurvey::class);
+// Route::get('/{external_id}', [App\Http\Controllers\SurveyController::class, 'survey_input'])->name('survey.show');

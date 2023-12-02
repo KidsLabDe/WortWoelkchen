@@ -26,6 +26,7 @@ class SurveyController extends Controller
         {
             $part1 = rand(100, 999); // Generiert eine zufällige 3-stellige Zahl
             $part2 = rand(100, 999); // Generiert eine weitere zufällige 3-stellige Zahl
+            // TODO: Prüfen, ob die ID schon existiert
 
             $external_id = $part1 . '-' . $part2; // Fügt die beiden Teile mit einem "-" in der Mitte zusammen
 
@@ -44,7 +45,7 @@ class SurveyController extends Controller
         }
 
         if ($request->type == "feedback") {
-            
+
             $answers[] = "1 - Sehr Gut";
             $answers[] = "2 - Gut";
             $answers[] = "3 - Befriedigend";
@@ -64,6 +65,11 @@ class SurveyController extends Controller
         $survey->question = $request->question;
         $survey->type = $request->type;
         $survey->answers = json_encode($answers);
+        if ($request->time < 0) {
+            $survey->time = null;
+        } else {
+            $survey->time = $request->time;
+        }
         $survey->save();
 
 
@@ -85,22 +91,18 @@ class SurveyController extends Controller
 
         //var_dump($survey); die;
         $session_id = session()->getId();
-        $survey->answers = json_decode($survey->answers);
 
-        $enabled = true; // kann der Teilnehmer noch eine weitere Antwort abgeben?
-    
 
-        if ($survey->type == "feedback" ) {
-            //dd($survey); die;
 
-            //dd(words::where('user_id', $session_id)->where('survey_id', $survey->id)->get());
-
-            if (words::where('user_id', $session_id)
-            ->where('survey_id', $survey->id)
-            ->exists()) {
+        if ($survey->type == "feedback") {
+            if (
+                words::where('user_id', $session_id)
+                    ->where('survey_id', $survey->id)
+                    ->exists()
+            ) {
                 $enabled = false;
             }
-    
+
         }
 
         return view('survey_input', [
@@ -138,12 +140,6 @@ class SurveyController extends Controller
         $survey = Survey::where('external_id', $external_id)->firstOrFail();
         $words = Words::where('survey_id', $survey->id)->get();
 
-        $words_count = DB::table('words')
-            ->select('word', DB::raw('count(*) as total'))
-            ->groupBy('word')
-            ->where('survey_id', $survey->id)
-            ->orderBy('total', 'desc')
-            ->get();
 
 
         return view('survey_results', [

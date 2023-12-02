@@ -29,7 +29,12 @@ class Input extends Component
     public function showInput(string $survey_id, $user_id) {
         $survey = Survey::find($this->survey_id)->first();
         $this->wordcount = words::where('survey_id', $this->survey->id)->count();
-        $this->userwordcount = words::select('user_id')->where('survey_id', $this->survey->id)->count(); 
+        $this->userwordcount = words::where('user_id', $survey->user_id)->where('survey_id', $this->survey->id)->count(); 
+        $this->enableInput = true;
+        $this->userwordcount = 1;
+        if ($survey->time = -1) {
+            $this->timeLeft  = -1;
+        }
         $this->timeLeft = $survey->start -  $survey->time;
     }
 }
