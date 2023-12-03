@@ -16,6 +16,11 @@
     </style>
 
     <main class="form-signin w-100 m-auto">
+        
+        @if ( $survey->time > 0 and $survey->enabled) 
+        <label for="customRange1" class="form-label">Zeit übrig: {{ $survey->time_left }}</label>
+        <input type="range" class="form-range" id="customRange1" disabled min=0 max="{{ $survey->time}}" value="{{ $survey->time_left}}">
+        @endif
         <form wire:submit="save">
             @if ($survey->enabled)
                 @if ($survey->type == 'wordcloud')
@@ -52,16 +57,19 @@
 
     <div>
         {{-- Success is as dangerous as failure. --}}
-        <tr>
-            <td>{{ $survey->external_id }}</td>
-            <td>{{ $survey->question }}</td>
-            <td>{{ time() }}</td>
-            <td>{{ $survey->start }}</td>
-            <td>{{ $survey->time }}</td>
-            <td>{{ $survey->time_left }}</td>
-            <td>{{ $survey->enabled }}</td>
-            <td>{{ $survey->answer_count }}</td>
-        </tr>
+            <ul>
+                <li>ext id {{ $survey->external_id }}</li>
+                <li>frage {{ $survey->question }}</li>
+                <li>aktuelle zeit {{ time() }}</li>
+                <li>start zeit {{ $survey->start }}</li>
+                <li>zeit limit {{ $survey->time }}</li>
+                <li>zeit übrig (berechnet) {{ $survey->time_left }}</li>
+                <li>aktiv (berechnet) @if ($survey->enabled) AKTIV @else OFF @endif</li>
+                <li>antworten gesamt {{ $survey->answers_all_count }}</li>
+                <li>antworten meine {{ $survey->answers_user_count }}</li>
+                <li>antworten andere {{ $survey->user_count }}</li>
+                <li>DB::getQueryLog </li>
+            </ul>
 
         @if ($survey->enabled == 1)
             <div wire:poll.1s>

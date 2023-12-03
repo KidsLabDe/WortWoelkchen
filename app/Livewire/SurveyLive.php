@@ -32,11 +32,11 @@ class SurveyLive extends Component
 
     public function refreshWords()
     {
-
+        DB::connection()->enableQueryLog();
         $survey = Survey::find($this->survey_id)->first();
-        $this->wordcount = words::where('survey_id', $this->survey->id)->count();
-        $this->usercount = words::select('user_id')->where('survey_id', $this->survey->id)->groupBy('user_id')->count(); // TODO: this is not working - always 0
- 
+        $this->wordcount = $this->survey->answers_all_count;
+        $this->usercount = $this->survey->answers_user_count;
+        print_r(DB::getQueryLog());
         
     }
 }
