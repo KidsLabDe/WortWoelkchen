@@ -1,83 +1,143 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
 
 <head>
+    <script src="/js/color-modes.js"></script>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>{{ config('app.name') }}</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Raleway.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Gregor Walter">
+    <title>WordWölkchen.de - Kostenlosen Umfragen</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Favicons -->
+    <meta name="theme-color" content="#712cf9">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-md fixed-top navbar-shrink py-3 navbar-light" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>WortWölkchen.de</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"><a class="nav-link" href="pricing.html">GitHub</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacts.html">Kontakt</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" href="signup.html">Umfrage starten</a>
-            </div>
-        </div>
-    </nav>
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
 
-    <header class="pt-5">
-        <div class="container pt-4 pt-xl-5">
-            <div class="row pt-5">
-                <div class="col-md-8 col-lg-9 text-center text-md-start mx-auto">
-                    <div class="text-center">
-                        <h1 class="display-4 fw-bold mb-5">Live-Umfragen für Schule und Workshops -&nbsp;<span class="underline">kostenlos</span>.</h1>
-                        <p class="fs-5 text-muted mb-5">Frage eintragen und los gehts!</p>
-                    </div>
-                </div>
-                <div class="col"><img class="img-fluid" src="assets/img/illustrations/WortWölkchen_frei.png" style="width: 300px;"></div>
-                <div class="col-12 col-lg-10 mx-auto">
-                    <div class="text-center position-relative"></div>
-                </div>
-            </div>
-        </div>
-    </header>
+  <div class="container py-3">
+    
+    
+    @empty ($headeroff)
+    
+    <header>
+      <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        
+          @isset($title)
+          <span class="fs-4">{{ $title }}</span>
+          @endisset
+        
+        @isset ($menu)
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+          <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Features</a>
+          <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Enterprise</a>
+          <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Support</a>
+          <a class="py-2 link-body-emphasis text-decoration-none" href="#">Pricing</a>
+        </nav>
+        @endisset
+      </div>
+    @endempty
+
+    
+
+
+
 
     {{ $slot }}
 
+  </div>
 
-    <x-features></x-features>
-    <!-- faq -->
-    <x-f-a-q></x-f-a-q>
+    <script src="/js/bootstrap.bundle.min.js">
+    </script>
 
-    <footer>
-        <div class="container py-4 py-lg-5">
-            <div class="row row-cols-2 row-cols-md-4">
-                <div class="col-12 col-md-12">
-                    <div class="fw-bold d-flex align-items-center mb-2"><span>WortWölkchen ist ein Angebon von KidsLab.de</span></div>
-                    <p class="text-muted">Digitale Bildung für Kinder und Jugendliche.</p>
-                </div>
-            </div>
-            <hr>
-            <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2023 KidsLab.de</p>
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-github">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                        </svg></li>
-                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-lightbulb">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"></path>
-                        </svg></li>
-                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram">
-                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
-                        </svg></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/startup-modern.js"></script>
 </body>
 
 </html>
-
-
-

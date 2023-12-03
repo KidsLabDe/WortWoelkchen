@@ -55,11 +55,21 @@ class Survey extends Model
         return $words_count;
     }
 
+    /*
     public function getAnswersAttribute()
     {
-        return(json_decode($this->answers));
+        /* //dd($this);
+        if (!property_exists($this, 'answers')) {
+            // Property does not exist
+            return array();
+        } else {
+            dd($this->answers);
+            return(json_decode($this->answers));
+        }
+      
 
     }
+    */
 
 }
 

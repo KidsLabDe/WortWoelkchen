@@ -1,4 +1,4 @@
-<x-layout-bs title="Ergebnisse">
+<x-layout title="Ergebnisse">
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
 
@@ -142,4 +142,4 @@
     </section>
 
 
-</x-layout-bs>
+</x-layout>

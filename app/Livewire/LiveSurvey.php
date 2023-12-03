@@ -12,11 +12,14 @@ class LiveSurvey extends Component
     {
         $session_id = session()->getId();
 
-        $survey = \App\Models\Survey::where('external_id', $this->external_id)->first();
+        $survey = \App\Models\Survey::where('external_id', $this->external_id)->firstorfail();
         if ($survey->start == null) {
             $survey->start = now();
             $survey->save();
         }
+
+       //dd($survey->answers);
+        $survey->answers = json_decode($survey->answers);
 
         return view('livewire.live-survey', [
             'survey' => $survey,
