@@ -7,9 +7,9 @@
     <p class="lead">Type: {{ $survey->type }}</p>
     <p class="lead">Wörter: {{ $wordcount }}</p>
     <p class="lead">Deine Wörter: {{ $userwordcount }}</p>
-    @if ($survey->type != 'word' and $wordcount == 1)
+    @if ($survey->type != 'wordcloud' and $wordcount == 1)
         <p class="lead">You have already answered this survey</p>
-    @elseif ($survey->type == 'word')
+    @elseif ($survey->type == 'wordcloud')
         <p class="lead">Du hast schon {{ $wordcount }} Antworten abgegeben!</p>
     @else
         

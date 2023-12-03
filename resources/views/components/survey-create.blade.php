@@ -10,7 +10,7 @@
                 
             </div> -->
 
-                <div class="col-lg-12 fs-1 text-center align-self-center"><input type="text" id="questien"
+                <div class="col-lg-12 fs-1 text-center align-self-center"><input type="text" id="question"
                         name="question" placeholder="Deine Frage" autofocus="" required=""
                         data-sb-validations="required"></div>
                 <div class="invalid-feedback" data-sb-feedback="question:required">Ohne Fage geht's leider nicht.</div>
@@ -90,7 +90,7 @@
                                         werden als Wort-Wolke dargestellt und nach Häufigkeit sortiert.</p>
                                     <div class="input-group">
                                         <button class="btn btn-primary" type="submit" name="type"
-                                            value="word">Offene Umfrage</button>
+                                            value="wordcloud">Offene Umfrage</button>
                                     </div>
 
                                 </div>

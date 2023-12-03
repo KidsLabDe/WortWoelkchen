@@ -42,6 +42,7 @@ class SurveyController extends Controller
             $answers[] = $request->answer4;
             $answers[] = $request->answer5;
             $answers[] = $request->answer6;
+            $answers_max = 1;
         }
 
         if ($request->type == "feedback") {
@@ -52,7 +53,12 @@ class SurveyController extends Controller
             $answers[] = "4 - Ausreichend";
             $answers[] = "5 - Mangelhaft";
             $answers[] = "6 - Ungenügend";
+            $answers_max = 1;
             //dd($answers);
+        }
+
+        if ($request->type == "wordcloud") {
+            $answers_max = 99;
         }
 
         //dd($answers);
@@ -65,6 +71,7 @@ class SurveyController extends Controller
         $survey->question = $request->question;
         $survey->type = $request->type;
         $survey->answers = json_encode($answers);
+        $survey->answers_max = $answers_max;
         if ($request->time < 0) {
             $survey->time = null;
         } else {
@@ -145,7 +152,7 @@ class SurveyController extends Controller
         return view('survey_results', [
             'survey' => $survey,
             'words' => $words,
-            'words_count' => $words_count,
+            //'words_count' => $words_count,
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Words;
 
 class LiveSurvey extends Component
 {
@@ -16,6 +17,7 @@ class LiveSurvey extends Component
         if ($survey->start == null) {
             $survey->start = now();
             $survey->save();
+            $survey->refresh();
         }
 
        //dd($survey->answers);
@@ -43,7 +45,7 @@ class LiveSurvey extends Component
 
         if ($survey->type == "feedback") {
             if (
-                \App\Models\Words::where('user_id', $session_id)
+                Words::where('user_id', $session_id)
                     ->where('survey_id', $survey->id)
                     ->exists()
             ) {
@@ -52,11 +54,22 @@ class LiveSurvey extends Component
 
         }
 
-        $word = new \App\Models\Words;
-        $word->word = $this->answer;
-        $word->user_id = $session_id;
-        $word->survey_id = $survey->id;
-        $word->save();
+        if (words::where('word', $this->answer)
+        ->where('user_id', $session_id)
+        ->where('survey_id', $survey->id)
+        ->exists()) {
+            //echo ("word already exists");
+            
+        } else {
+
+
+
+            $word = new Words;
+            $word->word = $this->answer;
+            $word->user_id = $session_id;
+            $word->survey_id = $survey->id;
+            $word->save();
+        }
 
         $this->answer = "";
     }
