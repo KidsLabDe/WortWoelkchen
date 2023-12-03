@@ -48,13 +48,32 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="accordion" role="tablist" id="accordion-3">
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#accordion-3 .item-2"
+                                    aria-expanded="false" aria-controls="accordion-3 .item-2">Wort-Wolke</button></h2>
+                            <div class="accordion-collapse collapse show item-2" role="tabpanel"
+                                data-bs-parent="#accordion-3">
+                                <div class="accordion-body">
+                                    <p class="mb-0">Starte eine offene Umfrage: jeder kann Begriffe eingeben, sie
+                                        werden als Wort-Wolke dargestellt und nach Häufigkeit sortiert.</p>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" type="submit" name="type"
+                                            value="wordcloud">Offene Umfrage</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" role="tab"><button class="accordion-button" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#accordion-3 .item-1" aria-expanded="true"
                                     aria-controls="accordion-3 .item-1">Multiple-Choice</button>
                                 <div class="input-group"></div>
                             </h2>
-                            <div class="accordion-collapse collapse show item-1" role="tabpanel"
+                            <div class="accordion-collapse collapse  item-1" role="tabpanel"
                                 data-bs-parent="#accordion-3">
                                 <div class="accordion-body">
                                     <p class="mb-0">Gib die möglichen Antworten ein: </p>
@@ -76,23 +95,6 @@
                                             value="multiple-choice">Multiple-Choice Umfrage
                                             starten</button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#accordion-3 .item-2"
-                                    aria-expanded="false" aria-controls="accordion-3 .item-2">Wort-Wolke</button></h2>
-                            <div class="accordion-collapse collapse item-2" role="tabpanel"
-                                data-bs-parent="#accordion-3">
-                                <div class="accordion-body">
-                                    <p class="mb-0">Starte eine offene Umfrage: jeder kann Begriffe eingeben, sie
-                                        werden als Wort-Wolke dargestellt und nach Häufigkeit sortiert.</p>
-                                    <div class="input-group">
-                                        <button class="btn btn-primary" type="submit" name="type"
-                                            value="wordcloud">Offene Umfrage</button>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -123,10 +125,10 @@
                                 data-bs-parent="#accordion-3">
                                 <div class="accordion-body">
                                     <p class="mb-0">Du möchtest nach dem Event noch Infos an die Teilnehmer schicken?
-                                        Dann frage nach den Kontaktdaten!</p>
+                                        Dann frage nach den Kontaktdaten! (in Vorbereitung)</p>
                                     <div class="input-group">
                                         <button class="btn btn-primary" type="submit" name="type"
-                                            value="contact">Kontaktdaten</button>
+                                            value="contact" disabled>Kontaktdaten</button>
                                     </div>
                                 </div>
 

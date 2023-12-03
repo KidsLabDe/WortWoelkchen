@@ -32,11 +32,10 @@ class SurveyLive extends Component
 
     public function refreshWords()
     {
-        DB::connection()->enableQueryLog();
         $survey = Survey::find($this->survey_id)->first();
         $this->wordcount = $this->survey->answers_all_count;
         $this->usercount = $this->survey->answers_user_count;
-        print_r(DB::getQueryLog());
+
         
     }
 }

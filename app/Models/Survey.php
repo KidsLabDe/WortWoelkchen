@@ -18,15 +18,21 @@ class Survey extends Model
         // Enddatum prüfen - wenn gesetzt, dann prüfen, ob das Enddatum erreicht ist - wenn ja, dann nicht aktiv
         if (!is_null($this->end)) {
             if (time() > strtotime($this->end)) {
-                return "falsch";
+                $enabled = false;
             }
         }
         // ist die umfrage zeitlich begrenzt und ist die zeit abgelaufen?
         if (($this->time_left > 0) or (is_null($this->time))) {
-            return true;
+            $enabled = true;
         } else {
-            return false;
+            $enabled = false;
         }
+        //dd($this->answers_user_count, $this->answers_max);
+        if ($this->answers_user_count >= $this->answers_max) {
+            $enabled = false;
+        }
+
+        return $enabled;
 
     }
 
@@ -71,7 +77,7 @@ class Survey extends Model
         $user_count = words::select('user_id')
             ->where('survey_id', $this->id)
             ->groupBy('user_id')
-            ->count();
+            ->toSQL();
 
 
         // TODO: gibt immer 3 zürück - warum? Geht GROUP BY nicht in SQLite?

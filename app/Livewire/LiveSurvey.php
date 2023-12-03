@@ -20,7 +20,7 @@ class LiveSurvey extends Component
             $survey->refresh();
         }
 
-       //dd($survey->answers);
+        //dd($survey->answers);
         $survey->answers = json_decode($survey->answers);
 
         return view('livewire.live-survey', [
@@ -34,16 +34,23 @@ class LiveSurvey extends Component
         $this->external_id = $external_id;
     }
 
-    public function save() {
+    public function save($answer = null)
+    {
+
+        if (($answer != '')) {
+            $this->answer = $answer;
+        }
+
         $this->validate([
             'answer' => 'required|min:1|max:255',
         ]);
 
         $session_id = session()->getId();
+        
 
         $survey = \App\Models\Survey::where('external_id', $this->external_id)->first();
 
-        if ($survey->type == "feedback") {
+/*        if ($survey->type == "feedback") {
             if (
                 Words::where('user_id', $session_id)
                     ->where('survey_id', $survey->id)
@@ -53,13 +60,18 @@ class LiveSurvey extends Component
             }
 
         }
+*/
 
-        if (words::where('word', $this->answer)
-        ->where('user_id', $session_id)
-        ->where('survey_id', $survey->id)
-        ->exists()) {
+
+
+        if (
+            words::where('word', $this->answer)
+                ->where('user_id', $session_id)
+                ->where('survey_id', $survey->id)
+                ->exists()
+        ) {
             //echo ("word already exists");
-            
+
         } else {
 
 

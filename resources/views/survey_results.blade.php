@@ -1,4 +1,4 @@
-<x-layout title="Ergebnisse">
+<x-layout-noheader title="Ergebnisse">
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
 
@@ -29,7 +29,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                                @foreach ($words_count as $word)
+                                @foreach ($words as $word)
                                 <tr>
                                     <th scope="row">{{ $loop->index +1 }}</th>
                                     <td>{{ $word->word }}</td>
@@ -54,7 +54,7 @@
                 var url = "/api/survey-result/b8e247e6-f713-4995-a642-d8fd0ef6d1c4";
                 var myWords = [
 
-                    @foreach ($words_count as $word)
+                    @foreach ($words as $word)
                         '{{ $word->word }}',
                     @endforeach
 
@@ -142,4 +142,4 @@
     </section>
 
 
-</x-layout>
+</x-layout-noheader>

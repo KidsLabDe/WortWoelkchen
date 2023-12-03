@@ -59,6 +59,8 @@ class SurveyController extends Controller
 
         if ($request->type == "wordcloud") {
             $answers_max = 99;
+        } else {
+            $answers_max = 1;
         }
 
         //dd($answers);
@@ -145,14 +147,20 @@ class SurveyController extends Controller
 
 
         $survey = Survey::where('external_id', $external_id)->firstOrFail();
-        $words = Words::where('survey_id', $survey->id)->get();
+        $words = DB::table('words')
+            ->select('word', DB::raw('count(*) as total'))
+            // ->select('word')
+            ->groupBy('word')
+            ->where('survey_id', $survey->id)
+            ->orderBy('total', 'desc')
+            ->get();
 
 
 
         return view('survey_results', [
             'survey' => $survey,
             'words' => $words,
-            //'words_count' => $words_count,
+            'words_count' => $survey->answers_all_count,
         ]);
     }
 
@@ -172,8 +180,8 @@ class SurveyController extends Controller
         //$words = Words::where('survey_id', $survey->id)->get();
 
         $words = DB::table('words')
-            //->select('word', DB::raw('count(*) as total'))
-            ->select('word')
+            ->select('word', DB::raw('count(*) as total'))
+            // ->select('word')
             ->groupBy('word')
             ->where('survey_id', $survey->id)
             ->get();
