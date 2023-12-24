@@ -66,22 +66,31 @@
         </div>
     @endif
 
-
-    <!-- TODO:Remove this
-    <div>
-        <ul>
-            <li>ext id {{ $survey->external_id }}</li>
-            <li>frage {{ $survey->question }}</li>
-            <li>aktuelle zeit {{ time() }}</li>
-            <li>start zeit {{ $survey->start }}</li>
-            <li>zeit limit {{ $survey->time }}</li>
-            <li>zeit übrig (berechnet) {{ $survey->time_left }}</li>
-            <li>antworten gesamt {{ $survey->answers_all_count }}</li>
-            <li>antworten meine {{ $survey->answers_user_count }}</li>
-            <li>user {{ $survey->user_count }}</li>
-            <li>DB::getQueryLog </li>
-        </ul>
-        <button wire:click="$refresh">Refresh page!</button>
-    </div>
-    -->
+    @if (!isset($debug))
+        <div class="alert alert-danger" role="alert">
+            Debug!
+        </div>
+        <!-- TODO:Remove this -->
+        <div>
+            <ul>
+                <li>ext id {{ $survey->external_id }}</li>
+                <li>frage {{ $survey->question }}</li>
+                <li>aktuelle zeit {{ time() }}</li>
+                <li>start zeit {{ $survey->start }}</li>
+                <li>zeit limit {{ $survey->time }}</li>
+                <li>zeit übrig (berechnet) {{ $survey->time_left }}</li>
+                <li>antworten gesamt {{ $survey->answers_all_count }}</li>
+                <li>antworten meine {{ $survey->answers_user_count }}</li>
+                <li>user {{ $survey->user_count }}</li>
+                <li>DB::getQueryLog </li>
+                <li>{{ $survey->enabled }}</li>
+                <li>{{ $survey->end }}</li>
+                <li>{{ strtotime($survey->end) }}</li>
+                <li>{{ time() }}</li>
+                <li>{{ time() > strtotime($survey->end)  }}</li>
+            </ul>
+            <button wire:click="$refresh">Refresh page!</button>
+        </div>
+    @endif
+    
 </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Words;
+use App\Models\Words; // Add this line to import the Words model
 use App\Models\Survey;
 use Illuminate\Support\Facades\DB;
 

@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Livewire;
-
 use Livewire\Component;
-use App\Models\Words;
-
+use App\Models\Words; // Add this line
+use App\Models\Survey; // Add this line
 class LiveSurvey extends Component
 {
     public $external_id;
@@ -13,7 +12,7 @@ class LiveSurvey extends Component
     {
         $session_id = session()->getId();
 
-        $survey = \App\Models\Survey::where('external_id', $this->external_id)->firstorfail();
+        $survey = Survey::where('external_id', $this->external_id)->firstorfail();
         if ($survey->start == null) {
             $survey->start = now();
             $survey->save();
